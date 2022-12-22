@@ -70,8 +70,10 @@ class BreweriesController < ApplicationController
     end
 
     def authenticate
+      admin_accounts = { "pekka" => "beer", "arto" => "foobar", "matti" => "ittam", "vilma" => "kangas" }
+
       authenticate_or_request_with_http_basic do |username, password|
-        if username == "admin" and password == "secret"
+        if admin_accounts.has_key?(username) and admin_accounts.has_value?(password)
           return true
         else
           raise "Wrong username or password" # käyttäjätunnus/salasana oli väärä
