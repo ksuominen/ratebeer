@@ -13,6 +13,6 @@ class User < ApplicationRecord
     end
   end
 
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
 end
