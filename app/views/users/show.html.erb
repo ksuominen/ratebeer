@@ -4,17 +4,26 @@
   <h2>Username:</h2>
 
   <p><%= @user.username %></p>
-  <p>Has made <%= pluralize(@user.ratings.count, "rating") %>, average rating <%= @user.ratings.average(:score).round(1) %></p>
+
+  <p>
+    <% if @user.ratings.empty? %>
+      Has made no ratings
+    <% else %>
+      Has made <%= pluralize(@user.ratings.count, "rating") %>, average rating <%= @user.ratings.average(:score).round(1) %>
+    <% end %>
+  </p>
 
   <p><strong>ratings</strong></p>
 
   <p>
-    <% @user.ratings.each do |rating| %>
-      <li> <%= rating.beer.name %> <%= rating.score %> <%= link_to 'Delete', "/ratings/" + rating.id.to_s,
-      data: {
-        "turbo-method": :delete,
-        "turbo-confirm": "Are you sure?"
-      } %> </li>
+    <% if !@user.ratings.empty? %>
+      <% @user.ratings.each do |rating| %>
+        <li> <%= rating.beer.name %> <%= rating.score %> <%= link_to 'Delete', "/ratings/" + rating.id.to_s,
+        data: {
+          "turbo-method": :delete,
+          "turbo-confirm": "Are you sure?"
+        } %> </li>
+      <% end %>
     <% end %>
   </p>
 </div>
