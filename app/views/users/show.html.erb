@@ -18,11 +18,15 @@
   <p>
     <% if !@user.ratings.empty? %>
       <% @user.ratings.each do |rating| %>
-        <li> <%= rating.beer.name %> <%= rating.score %> <%= link_to 'Delete', "/ratings/" + rating.id.to_s,
-        data: {
-          "turbo-method": :delete,
-          "turbo-confirm": "Are you sure?"
-        } %> </li>
+        <li> <%= rating.beer.name %> <%= rating.score %> 
+          <% if @user == current_user %>
+            <%= link_to 'Delete', rating,
+            data: {
+              "turbo-method": :delete,
+              "turbo-confirm": "Are you sure?"
+            } %> 
+          <% end %>
+        </li>
       <% end %>
     <% end %>
   </p>
