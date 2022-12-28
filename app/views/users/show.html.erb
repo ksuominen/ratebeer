@@ -10,7 +10,11 @@
 
   <p>
     <% @user.ratings.each do |rating| %>
-      <li> <%= rating.beer.name %> <%= rating.score %> <%= render rating %> <%= button_to 'delete', rating, method: :delete, form: { data: { 'turbo-confirm': 'Are you sure?' } } %> </li>
+      <li> <%= rating.beer.name %> <%= rating.score %> <%= link_to 'Delete', "/ratings/" + rating.id.to_s,
+      data: {
+        "turbo-method": :delete,
+        "turbo-confirm": "Are you sure?"
+      } %> </li>
     <% end %>
   </p>
 </div>
