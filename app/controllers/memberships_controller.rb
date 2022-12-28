@@ -13,6 +13,7 @@ class MembershipsController < ApplicationController
   # GET /memberships/new
   def new
     @membership = Membership.new
+    @beerclubs = Beerclub.all
   end
 
   # GET /memberships/1/edit
@@ -22,12 +23,15 @@ class MembershipsController < ApplicationController
   # POST /memberships or /memberships.json
   def create
     @membership = Membership.new(membership_params)
+    @membership.user_id = current_user.id
+    print @membership_params
 
     respond_to do |format|
       if @membership.save
         format.html { redirect_to membership_url(@membership), notice: "Membership was successfully created." }
         format.json { render :show, status: :created, location: @membership }
       else
+        @beerclubs = Beerclub.all
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @membership.errors, status: :unprocessable_entity }
       end
@@ -65,6 +69,6 @@ class MembershipsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def membership_params
-      params.require(:membership).permit(:beer_club_id, :user_id)
+      params.require(:membership).permit(:beerclub_id, :user_id)
     end
 end
