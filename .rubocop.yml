@@ -72,3 +72,6 @@ Metrics/BlockLength:
 
 Layout/EndOfLine:
   EnforcedStyle: lf
+
+Metrics/MethodLength:
+  Max: 15
