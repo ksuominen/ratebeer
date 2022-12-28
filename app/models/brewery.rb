@@ -3,8 +3,15 @@ class Brewery < ApplicationRecord
   has_many :ratings, through: :beers
 
   validates :year, numericality: { greater_than_or_equal_to: 1040,
-                                    less_than_or_equal_to: 2022,
                                     only_integer: true }
   
   validates :name, presence: true
+
+  validate :year_not_in_the_future
+
+  def year_not_in_the_future
+    if year > Time.now.year
+      errors.add(:year, "can't be in the future")
+    end
+  end
 end
