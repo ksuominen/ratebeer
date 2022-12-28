@@ -65,6 +65,6 @@ class MembershipsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def membership_params
-      params.require(:membership).permit(:beer_club_id, :integer, :user_id, :integer)
+      params.require(:membership).permit(:beer_club_id, :user_id)
     end
 end
