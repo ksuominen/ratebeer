@@ -71,7 +71,7 @@ Metrics/BlockLength:
   Enabled: false
 
 Layout/EndOfLine:
-  EnforcedStyle: lf
+  Enabled: False
 
 Metrics/MethodLength:
   Max: 15
