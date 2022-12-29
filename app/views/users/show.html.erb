@@ -40,12 +40,16 @@
 
 <p>
   <strong>favourite style:</strong>
-  <%= @user.favorite_style %>
+  <% if @user.favorite_style %>
+    <%= @user.favorite_style %>
+  <% end %>
 </p>
 
 <p>
   <strong>favourite brewery:</strong>
-  <%= link_to @user.favorite_brewery.name, @user.favorite_brewery %>
+  <% if @user.favorite_brewery %>
+    <%= link_to @user.favorite_brewery.name, @user.favorite_brewery %>
+  <% end %>
 </p>
 
 <div>
