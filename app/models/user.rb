@@ -15,6 +15,6 @@ class User < ApplicationRecord
 
   has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
-  has_many :memberships, dependent: :destroy
-  has_many :beerclubs, through: :memberships
+  has_one :membership, dependent: :destroy
+  has_one :beerclub, through: :membership
 end
