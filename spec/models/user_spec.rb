@@ -50,4 +50,9 @@ RSpec.describe User, type: :model do
       expect(user.ratings.count).to eq(2)
     end
   end
+
+  it "has method for determining the favorite_beer" do
+    user = FactoryBot.create(:user)
+    expect(user).to respond_to(:favorite_beer)
+  end
 end

@@ -17,4 +17,9 @@ class User < ApplicationRecord
   has_many :beers, through: :ratings
   has_one :membership, dependent: :destroy
   has_one :beerclub, through: :membership
+
+  def favorite_beer
+    return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
+  end
 end
