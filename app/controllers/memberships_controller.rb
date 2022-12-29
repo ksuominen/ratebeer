@@ -1,5 +1,5 @@
 class MembershipsController < ApplicationController
-  before_action :set_membership, only: %i[ show edit update destroy ]
+  before_action :set_membership, only: %i[show edit update destroy]
 
   # GET /memberships or /memberships.json
   def index
@@ -13,8 +13,8 @@ class MembershipsController < ApplicationController
   # GET /memberships/new
   def new
     @membership = Membership.new
-    
-    @beerclubs = if current_user.beerclub then Beerclub.where.not(id: current_user.beerclub.id) else Beerclub.all end 
+
+    @beerclubs = current_user.beerclub ? Beerclub.where.not(id: current_user.beerclub.id) : Beerclub.all
   end
 
   # GET /memberships/1/edit
@@ -33,7 +33,7 @@ class MembershipsController < ApplicationController
         format.html { redirect_to user_path(@membership.user_id), notice: "Membership was successfully created." }
         format.json { render :show, status: :created, location: @membership }
       else
-        @beerclubs = if current_user.beerclub then Beerclub.where.not(id: current_user.beerclub.id) else Beerclub.all end  
+        @beerclubs = current_user.beerclub ? Beerclub.where.not(id: current_user.beerclub.id) : Beerclub.all
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @membership.errors, status: :unprocessable_entity }
       end
@@ -64,13 +64,14 @@ class MembershipsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_membership
-      @membership = Membership.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def membership_params
-      params.require(:membership).permit(:beerclub_id, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_membership
+    @membership = Membership.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def membership_params
+    params.require(:membership).permit(:beerclub_id, :user_id)
+  end
 end
