@@ -49,4 +49,13 @@ describe "User" do
       expect(page).not_to have_content rating.score
     end
   end
+
+  it "shows user's favourite style and brewery" do
+    minna = FactoryBot.create(:user, username: "Minna")
+    sign_in(username: "Minna", password: "Foobar1")
+    create_beer_with_rating({user: minna}, 25)
+    visit user_path(minna)
+    expect(page).to have_content "Lager"
+    expect(page).to have_content "anonymous"
+  end
 end
