@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   def favorite_brewery
     return nil if ratings.empty?
-    
+
     averages = beers.group(:brewery).average(:score)
     a = averages.max_by { |_x, y| y }
     a[0]
