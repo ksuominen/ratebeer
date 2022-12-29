@@ -83,4 +83,5 @@ group :test do
   gem 'rspec-rails', '~> 6.0.0.rc1'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
