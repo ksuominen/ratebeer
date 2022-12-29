@@ -81,3 +81,8 @@ end
 group :development, :test do
   gem 'pry-byebug'
 end
+
+group :test do
+  # ...
+  gem 'rspec-rails', '~> 6.0.0.rc1'
+end
