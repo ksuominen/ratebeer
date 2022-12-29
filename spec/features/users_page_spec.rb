@@ -33,4 +33,20 @@ describe "User" do
       click_button('Create User')
     }.to change{User.count}.by(1)
   end
+
+  it "lists user's ratings" do
+    maija = FactoryBot.create(:user, username: "Maija")
+    lasse = FactoryBot.create(:user, username: "Lasse")
+    create_beers_with_many_ratings({user: maija}, 10, 20, 15, 7, 9)
+    create_beers_with_many_ratings({user: lasse}, 27, 35, 14, 6)
+    visit user_path(maija)
+    
+    maija.ratings.each do |rating|
+      expect(page).to have_content rating.score
+    end
+
+    lasse.ratings.each do |rating|
+      expect(page).not_to have_content rating.score
+    end
+  end
 end
