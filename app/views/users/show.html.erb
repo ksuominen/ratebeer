@@ -43,6 +43,11 @@
   <%= @user.favorite_style %>
 </p>
 
+<p>
+  <strong>favourite brewery:</strong>
+  <%= link_to @user.favorite_brewery.name, @user.favorite_brewery %>
+</p>
+
 <div>
   <% if current_user == @user %>
     <%= link_to "Edit this user", edit_user_path(@user) %> |
