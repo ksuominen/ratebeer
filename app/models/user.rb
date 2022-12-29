@@ -30,7 +30,17 @@ class User < ApplicationRecord
     return beers.first.style if beers.count == 1
 
     averages = beers.group(:style).average(:score)
-    a = averages.max_by { |x, y| y }
+    a = averages.max_by { |_x, y| y }
+    a[0]
+  end
+
+  def favorite_brewery
+    return nil if ratings.empty?
+
+    return beers.first.brewery if beers.count == 1
+
+    averages = beers.group(:brewery).average(:score)
+    a = averages.max_by { |_x, y| y }
     a[0]
   end
 end
