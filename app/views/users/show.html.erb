@@ -38,6 +38,11 @@
   </p>
 </div>
 
+<p>
+  <strong>favourite style:</strong>
+  <%= @user.favorite_style %>
+</p>
+
 <div>
   <% if current_user == @user %>
     <%= link_to "Edit this user", edit_user_path(@user) %> |
