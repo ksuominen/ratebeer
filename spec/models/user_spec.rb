@@ -95,14 +95,15 @@ RSpec.describe User, type: :model do
       expect(user.favorite_style).to eq(beer.style)
     end
 
-    it "is the one with highest rating if several rated" do
-      first = create_beer_with_rating_and_style({user: user}, 10, "IPA")
-      second = create_beer_with_rating_and_style({user: user}, 15, "Porter")
-      third = create_beer_with_rating_and_style({user: user}, 27, "Lager")
+    it "is the one with highest average rating if several rated" do
+      create_beer_with_rating_and_style({user: user}, 10, "IPA")
+      create_beer_with_rating_and_style({user: user}, 15, "Porter")
+      create_beer_with_rating_and_style({user: user}, 27, "Lager")
+      create_beer_with_rating_and_style({user: user}, 27, "Lager")
+      create_beer_with_rating_and_style({user: user}, 27, "Lager")
+      create_beer_with_rating_and_style({user: user}, 30, "Porter")
 
-      best = create_beer_with_rating_and_style({user: user}, 45, "Porter")
-
-      expect(user.favorite_style).to eq("Porter")
+      expect(user.favorite_style).to eq("Lager")
     end
   end
 end 

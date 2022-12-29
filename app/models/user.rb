@@ -27,7 +27,10 @@ class User < ApplicationRecord
   def favorite_style
     return nil if ratings.empty?
 
-    beer = ratings.order(score: :desc).limit(1).first.beer
-    beer.style
+    return beers.first.style if beers.count == 1
+
+    averages = beers.group(:style).average(:score)
+    a = averages.max_by { |x, y| y }
+    a[0]
   end
 end
