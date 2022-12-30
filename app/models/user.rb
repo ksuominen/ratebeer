@@ -29,7 +29,7 @@ class User < ApplicationRecord
 
     averages = beers.group(:style).average(:score)
     a = averages.max_by { |_x, y| y }
-    a[0]
+    a[0].name
   end
 
   def favorite_brewery
