@@ -94,18 +94,21 @@ RSpec.describe User, type: :model do
       beer = FactoryBot.create(:beer)
       rating = FactoryBot.create(:rating, score: 20, beer: beer, user: user)
 
-      expect(user.favorite_style).to eq(beer.style)
+      expect(user.favorite_style).to eq(beer.style.name)
     end
 
     it "is the one with highest average rating if several rated" do
-      create_beer_with_rating_and_style({user: user}, 10, "IPA")
-      create_beer_with_rating_and_style({user: user}, 15, "Porter")
-      create_beer_with_rating_and_style({user: user}, 27, "Lager")
-      create_beer_with_rating_and_style({user: user}, 27, "Lager")
-      create_beer_with_rating_and_style({user: user}, 27, "Lager")
-      create_beer_with_rating_and_style({user: user}, 30, "Porter")
+      ipa = FactoryBot.create(:style, name: "IPA")
+      porter = FactoryBot.create(:style, name: "Porter")
+      lager = FactoryBot.create(:style, name: "Lager")
+      create_beer_with_rating_and_style({user: user}, 10, ipa)
+      create_beer_with_rating_and_style({user: user}, 15, porter)
+      create_beer_with_rating_and_style({user: user}, 27, lager)
+      create_beer_with_rating_and_style({user: user}, 27, lager)
+      create_beer_with_rating_and_style({user: user}, 27, lager)
+      create_beer_with_rating_and_style({user: user}, 30, porter)
 
-      expect(user.favorite_style).to eq("Lager")
+      expect(user.favorite_style).to eq(lager.name)
     end
   end
 
