@@ -2,7 +2,7 @@
 
 <%= render @beerclub %>
 
-<% if current_user %>
+<% if current_user && current_user.beerclub != @beerclub %>
   <%= form_with(model: @membership) do |form| %>
     <%= form.hidden_field :beerclub_id, value: @beerclub.id %>
     <%= form.hidden_field :user_id, value: current_user.id %>
