@@ -10,6 +10,10 @@
   <% end %>
 <% end %>
 
+<% if current_user && current_user.beerclub == @beerclub %>
+  <%= button_to "End the membership", current_user.membership, method: :delete %>
+<% end %>
+
 <div>
   <%= link_to "Edit this beerclub", edit_beerclub_path(@beerclub) if current_user %> |
   <%= link_to "Back to beerclubs", beerclubs_path %>
