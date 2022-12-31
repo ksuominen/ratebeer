@@ -1,23 +1,25 @@
 <h1>Beers</h1>
 
-<div id="beers">
+<table class="table table-hover">
+  <thead>
+    <th>Beer</th>
+    <th>Style</th>
+    <th>Brewery</th>
+    <th>Rating</th>
+  </thead>
   <% @beers.each do |beer| %>
-    <p>
-      <strong>Name:</strong>
-      <%= link_to beer.name, beer %>
-    </p>
-
-    <p>
-      <strong>Style:</strong>
-      <%= beer.style.name %>
-    </p>
-
-    <p>
-      <strong>Brewery:</strong>
-      <%= link_to beer.brewery.name, beer.brewery%>
-    </p>
+    <tr>
+      <td><%= link_to beer.name, beer %></td>
+      <td><%= link_to beer.style.name, beer.style %></td>
+      <td><%= link_to beer.brewery.name, beer.brewery %></td>
+      <% if beer.ratings.empty? %>
+        <td>0.0</td>
+      <% else %>
+        <td><%= beer.ratings.average(:score).round(1) %></td>
+      <% end %>
+    </tr>
   <% end %>
-</div>
+</table>
 
 <p><%= link_to 'list of breweries', breweries_path%></p>
 
