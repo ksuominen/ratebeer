@@ -13,10 +13,8 @@ class PlacesController < ApplicationController
     @weather = WeatherstackApi.get_weather_in(params[:city])
     if @places.empty?
       flash.now[:notice] = "No locations in #{params[:city]}"
-      render :index, status: 418
-    else
-      render :index, status: 418
     end
+    render :index, status: 418
   end
 
   def set_place

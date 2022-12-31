@@ -4,8 +4,8 @@ require 'json'
 class WeatherstackApi
   def self.get_weather_in(city)
     params = {
-      :access_key => key,
-      :query => city
+      access_key: key,
+      query: city
     }
     uri = URI('http://api.weatherstack.com/current')
     uri.query = URI.encode_www_form(params)
