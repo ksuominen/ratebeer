@@ -1,3 +1,4 @@
+require 'json'
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show]
 
@@ -9,8 +10,10 @@ class PlacesController < ApplicationController
 
   def search
     @places = BeermappingApi.places_in(params[:city])
+    @weather = WeatherstackApi.get_weather_in(params[:city])
     if @places.empty?
-      redirect_to places_path, notice: "No locations in #{params[:city]}"
+      flash.now[:notice] = "No locations in #{params[:city]}"
+      render :index, status: 418
     else
       render :index, status: 418
     end
